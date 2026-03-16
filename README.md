@@ -1,89 +1,197 @@
-Pré-requisitos
+# Automação de Testes Back-End - Dog API
 
-- Node.js (preferencialmente versão LTS)
+Este projeto contém testes automatizados para a **Dog API**, garantindo que os endpoints estejam funcionando corretamente, retornando dados no formato esperado e validando cenários de sucesso e falha.
 
-- npm (gerenciador de pacotes do Node.js)
+---
 
-- Cypress (instalado localmente no projeto)
+## Cenários de Teste
+
+### Cenário 1 - Listar todas as raças de cães (CT001)
+
+**Objetivo:**  
+Validar que o endpoint retorna todas as raças de cães corretamente.
+
+**Passos automatizados:**
+
+1. Enviar requisição GET para `https://dog.ceo/api/breeds/list/all`  
+2. Validar que o status HTTP seja `200`  
+3. Validar que `response.body.status` seja `"success"`  
+4. Validar que `message` seja um objeto  
+5. Validar que `message` contenha a propriedade `"hound"`  
+
+---
+
+### Cenário 2 - Listar imagens de uma raça específica (CT002)
+
+**Objetivo:**  
+Validar que é possível obter imagens de uma raça específica de cachorro.
+
+**Passos automatizados:**
+
+1. Enviar requisição GET para `https://dog.ceo/api/breed/hound/images`  
+2. Validar que o status HTTP seja `200`  
+3. Validar que `response.body.status` seja `"success"`  
+4. Validar que `message` seja um array  
+5. Validar que o array tenha pelo menos 1 item  
+6. Validar que o primeiro item do array contenha a string `"hound"`  
+
+---
+
+### Cenário 3 - Não retornar imagens para raça inválida (CT003)
+
+**Objetivo:**  
+Validar que o endpoint retorna erro ao solicitar imagens de uma raça inexistente.
+
+**Passos automatizados:**
+
+1. Enviar requisição GET para `https://dog.ceo/api/breed/racaInexistente/images`  
+2. Validar que o status HTTP seja `404`  
+
+---
+
+### Cenário 4 - Retornar uma imagem aleatória de cachorro (CT004)
+
+**Objetivo:**  
+Validar que é possível obter uma imagem aleatória de cachorro.
+
+**Passos automatizados:**
+
+1. Enviar requisição GET para `https://dog.ceo/api/breeds/image/random`  
+2. Validar que o status HTTP seja `200`  
+3. Validar que `response.body.status` seja `"success"`  
+4. Validar que `message` seja uma string  
+5. Validar que a URL do `message` contenha `"images.dog.ceo"`  
+
+---
+
+### Cenário 5 - Validar o contrato da resposta da API (CT005)
+
+**Objetivo:**  
+Garantir que a resposta da API está conforme o contrato esperado.
+
+**Passos automatizados:**
+
+1. Enviar requisição GET para `https://dog.ceo/api/breeds/image/random`  
+2. Validar que o status HTTP seja `200`  
+3. Validar que `body` possua apenas as chaves `message` e `status`  
+4. Validar que `message` seja uma string  
+5. Validar que `status` seja `"success"`  
+
+---
+
+## Pré-requisitos
+
+- Node.js (preferencialmente versão LTS)  
+- npm (gerenciador de pacotes do Node.js)  
+- Cypress (instalado localmente no projeto)  
+- VSCode (ou outro editor de código)  
+- Yarn (opcional, caso queira usar CI/CD ou GitHub Actions)  
+
+---
+
+## 1 - Instale Node.js
+
+Acesse o site: https://nodejs.org/pt  
+
+Faça o download e execute o instalador.  
+Após a instalação, reinicie o computador.  
+Quando o sistema reiniciar, siga para o próximo passo.  
+
+---
+
+## 2 - Instale o VSCode
+
+No navegador digite `vscode download` ou acesse o link: https://code.visualstudio.com/download  
+
+Após baixar, execute o instalador.  
+
+Entre na pasta do projeto, clique com o botão direito do mouse e selecione **Abrir no Terminal**  
+
+Digite o comando:  code . e pressione Enter.  
+
+---
+
+## 3 - Instalação das Dependências
+
+Com o VSCode aberto dentro do projeto:  
+
+1. Clique em **Terminal** → **New Terminal**  
+2. No terminal que abriu, digite:  npm install
+> Esse comando instalará todas as dependências listadas no `package.json`, incluindo Cypress, Mochawesome e plugins necessários.
+
+---
+
+## 4 - Executar os Testes
+
+### 4.1 Abrir Cypress Test Runner (modo visual)
+
+npx cypress open
 
 
-1 - Instale Node.js
+> Esse comando abrirá o **Cypress Test Runner**, onde você poderá selecionar e executar os testes individualmente ou em conjunto abrindo o navegador.
 
-Acesse o site https://nodejs.org/pt e faça o download, em seguida execute o arquivo baixado
+### 4.2 Executar testes em modo headless e gerar relatório
 
-Após a instalação reinicie o computador
-
-Quando o sistema reiniciar
+npm run test
 
 
-2 - Instale o Vscode
-
-no navegador digite vscode download ou no link https://code.visualstudio.com/download
-
-após baixar execute o arquivo para instalar.
+> Este comando executa todos os testes automaticamente e gera relatórios Mochawesome em:  cypress/reports/report.html
+cypress/reports/report.json
 
 
-Entre na pasta do projeto e clique com o direito do mouse e selecione 'Abrir no Terminal'
+---
 
-digite o comando code . e de um enter
+## 5 - Abrindo o relatório
 
+**Opção 1 – Live Server (recomendado)**  
 
+1. Instale a extensão **Live Server** no VSCode  
+2. Clique com o botão direito em `report.html` → **Open with Live Server**  
 
-3 - Instalação das Dependências
+**Opção 2 – Preview interno**  
 
-No vscode aberto dentro do projeto Clique em terminal no canto superior a esquerda e em seguida em new terminal
+1. Clique com o botão direito em `report.html` → **Open Preview** (`Ctrl+Shift+V`)  
 
-No terminal que abriu na parte inferior, digite o seguinte comando:
+**Opção 3 – Terminal integrado**  
 
-npm install cypress --save-dev
+Windows
 
-Após instalar digite o comando npm install 
+start cypress\reports\report.html
 
-Isso instalará todas as dependências listadas no arquivo package.json, incluindo o Cypress e plugins necessários.
+Mac
 
+open cypress/reports/report.html
 
-4 - Configuração do SonarQube
+Linux
 
-Instalação do SonarQube:
-
-Faça o download e instale o SonarQube localmente conforme as instruções do site oficial https://www.sonarsource.com/products/sonarqube/downloads/.
-
-Inicie o SonarQube:
-
-Navegue até o diretório de instalação do SonarQube e inicie o servidor usando o comando apropriado para o seu sistema operacional.
-Exemplo: sonarqube-9.9.6.92038\bin\windows-x86-64
-
-No local do arquivo StartSonar.bat, clique com o direito do mouse na pasta e selecione 'Abrir no Terminal'
-
-digite StartSonar.bat no terminal e de um enter, isso ira subir o sonar na maquina local
-
-4.1
-
-Acessando o SonarQube
-
-Abra seu navegador e acesse http://localhost:9000.
-
-Faça login usando as credenciais padrão (usuário admin, senha admin)
-
-Mude a senha de admin para admin2 da forma que está no projeto, no arquivo sonar-project.properties.
+xdg-open cypress/reports/report.html
 
 
-5 - Execute o projeto
+---
 
-Após instalar e configurar tudo entre no projeto com o vscode e abra o terminal, digite o comando 'npx cypress open' Isso abrirá o Cypress Test Runner, onde você pode selecionar e executar os testes individualmente ou em conjunto abrindo o navegador.
+## 6 - Execução automática no GitHub Actions
 
-Para gerar relatorios e rodar em modo headless execute o comando no terminal do vscode 'npm run cy:run' e de um enter
+Este projeto possui execução automática de testes configurada no **GitHub Actions**.  
 
-Este comando limpa os relatórios existentes, executa os testes especificados no arquivo e gera relatórios usando Mochawesome.
+Sempre que há alterações no repositório, o pipeline executa automaticamente os testes Cypress.  
 
-e por ultimo
+Para visualizar a execução:  
 
-com o servidor do sonaqube local iniciado conforme o passo 4.1, Execute depois o comando 'npm run sonar' gerar o relatorio do sonarqube onde voce ira conseguir ver acessando http://localhost:9000. com login admin e senha admin2 após ter mudado pois o sonarqube exige.
+1. Acesse o repositório no GitHub  
+2. Clique na aba **Actions**  
+3. Selecione o workflow chamado **Cypress Tests**  
+4. Abra a execução mais recente para visualizar os passos do pipeline:  
+   - Instalação das dependências  
+   - Execução dos testes Cypress  
+   - Status final da execução (sucesso ou falha)  
 
+> Assim é possível acompanhar a execução dos testes diretamente pelo GitHub, sem precisar rodar localmente.
 
+---
 
+## 7 - Observações
 
-
-
-
-
+- Todos os testes tiram **screenshots automáticas** após execução (`afterEach`)  
+- A pasta `cypress/reports` pode ser limpa antes de rodar os testes para gerar relatórios do zero  
+- O relatório HTML permite verificar facilmente falhas e sucessos, incluindo cenários negativos como CT003  
+- É possível integrar o projeto em **GitHub Actions** usando `yarn test` ou `npm run test`  
