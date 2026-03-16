@@ -1,0 +1,182 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false,
+    "start": "2026-03-16T15:18:46.569Z",
+    "end": "2026-03-16T15:18:50.553Z",
+    "duration": 3984
+  },
+  "results": [
+    {
+      "uuid": "73a14c86-9df5-403f-be99-f064f1cb5bb1",
+      "title": "",
+      "fullFile": "cypress\\e2e\\testes.cy.js",
+      "file": "cypress\\e2e\\testes.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "aa842086-e5d9-4a58-9525-2926dce8a104",
+          "title": "Dog API - Breeds",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "CT001 - Deve listar todas as raças de cães Sucesso",
+              "fullTitle": "Dog API - Breeds CT001 - Deve listar todas as raças de cães Sucesso",
+              "timedOut": null,
+              "duration": 792,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_dogApi.default.todasAsRaçasSucesso().then(response => {\n  expect(response.status).to.eq(200);\n  expect(response.body.status).to.eq('success');\n  expect(response.body.message).to.be.an('object');\n  expect(response.body.message).to.have.property('hound');\n});",
+              "err": {},
+              "uuid": "e1a5ad6f-6cdf-4b11-becf-dec20d624aa3",
+              "parentUUID": "aa842086-e5d9-4a58-9525-2926dce8a104",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "CT002 - Deve listar imagens de uma raça específica",
+              "fullTitle": "Dog API - Breeds CT002 - Deve listar imagens de uma raça específica",
+              "timedOut": null,
+              "duration": 360,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_dogApi.default.imagensPorRaca('hound').then(response => {\n  expect(response.status).to.eq(200);\n  expect(response.body.status).to.eq('success');\n  expect(response.body.message).to.be.an('array');\n  expect(response.body.message.length).to.be.greaterThan(0);\n  expect(response.body.message[0]).to.include('hound');\n});",
+              "err": {},
+              "uuid": "40ebacb1-a152-4bb8-ad49-616e1bda645d",
+              "parentUUID": "aa842086-e5d9-4a58-9525-2926dce8a104",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "CT003 - Não deve retornar imagens para raça inválida",
+              "fullTitle": "Dog API - Breeds CT003 - Não deve retornar imagens para raça inválida",
+              "timedOut": null,
+              "duration": 318,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_dogApi.default.imagensPorRacaInexistente('racaInexistente').then(response => {\n  expect(response.status).to.eq(404);\n});",
+              "err": {},
+              "uuid": "f1cb1905-16f8-43f5-a7f9-98c634140ba9",
+              "parentUUID": "aa842086-e5d9-4a58-9525-2926dce8a104",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "CT004 - Deve retornar uma imagem aleatória de cachorro",
+              "fullTitle": "Dog API - Breeds CT004 - Deve retornar uma imagem aleatória de cachorro",
+              "timedOut": null,
+              "duration": 439,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_dogApi.default.imagemAleatoria().then(response => {\n  expect(response.status).to.eq(200);\n  expect(response.body.status).to.eq('success');\n  expect(response.body.message).to.be.a('string');\n  expect(response.body.message).to.include('images.dog.ceo');\n});",
+              "err": {},
+              "uuid": "e79a7c42-c82e-44dd-8866-55d47ab09041",
+              "parentUUID": "aa842086-e5d9-4a58-9525-2926dce8a104",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "CT005 - Deve validar o contrato da resposta da API",
+              "fullTitle": "Dog API - Breeds CT005 - Deve validar o contrato da resposta da API",
+              "timedOut": null,
+              "duration": 333,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_dogApi.default.imagemAleatoria().then(response => {\n  expect(response.status).to.eq(200);\n  expect(response.body).to.have.all.keys('message', 'status');\n  expect(response.body.message).to.be.a('string');\n  expect(response.body.status).to.eq('success');\n});",
+              "err": {},
+              "uuid": "89c500c1-ff3b-46a5-b578-ef27417c8609",
+              "parentUUID": "aa842086-e5d9-4a58-9525-2926dce8a104",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "e1a5ad6f-6cdf-4b11-becf-dec20d624aa3",
+            "40ebacb1-a152-4bb8-ad49-616e1bda645d",
+            "f1cb1905-16f8-43f5-a7f9-98c634140ba9",
+            "e79a7c42-c82e-44dd-8866-55d47ab09041",
+            "89c500c1-ff3b-46a5-b578-ef27417c8609"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2242,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.3.2"
+    }
+  }
+}
